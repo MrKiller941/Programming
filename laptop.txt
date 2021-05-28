@@ -1,0 +1,3 @@
+Xiaomi 79000 2 8
+Samsung 58000 1 4
+Huawei 98000 2 32
