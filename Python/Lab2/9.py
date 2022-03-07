@@ -1,18 +1,18 @@
 n = 8
-a = []
-b = []
+x = []
+y = []
 for i in range(n):
-    new_a, new_b = [int(s) for s in input().split()]
-    a.append(new_a)
-    b.append(new_b)
+    new_x, new_y = [int(s) for s in input().split()]
+    x.append(new_x)
+    y.append(new_y)
  
 correct = True
 for i in range(n):
     for j in range(i + 1, n):
-        if a[i] == a[j] or b[i] == b[j] or abs(a[i] - a[j]) == abs(b[i] - b[j]):
+        if x[i] == x[j] or y[i] == y[j] or abs(x[i] - x[j]) == abs(y[i] - y[j]):
             correct = False
  
 if correct:
-    print('No')
+    print('NO')
 else:
-    print('Yes')
+    print('YES')
