@@ -1,4 +1,4 @@
-A = {}
-for w in input().split():
-    A[w] = A.get(w, 0) + 1
-    print(A[w] - 1, end=' ')
+counter = {}
+for word in input().split():
+    counter[word] = counter.get(word, 0) + 1
+    print(word, counter[word] - 1)

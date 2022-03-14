@@ -3,5 +3,4 @@ def triangle(a, b, c):
         print('Треугольник')
     else:
         print('Не трегоугольник')
-
 triangle(int(input()), int(input()), int(input()))
