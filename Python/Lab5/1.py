@@ -1,6 +1,11 @@
 def triangle(a, b, c):
-    if (a + b) > c and (b + c) > a and (a + c) > b:
-        print('Это Треугольник')
+    a = int(a)
+    b = int(b)
+    c = int(c)
+    if(a + b >= c and a + c >= b and b + c >= a):
+        print("It's triangle")
     else:
-        print('Не трегоугольник')
-triangle(int(input()), int(input()), int(input()))
+        print("It isn't triangle")
+
+a, b, c = input().split()
+triangle(a, b, c)
