@@ -12,3 +12,8 @@ class iServ2 : public iUnknown
 public:
     virtual void Func2() = 0;
 };
+class iClassFactory : public iClassFactory
+{
+    public:
+    iClassFactory 
+}

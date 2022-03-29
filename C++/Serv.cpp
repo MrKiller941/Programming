@@ -1,100 +1,126 @@
-#include "Serv.h"
 #include <iostream>
+#include "iFace.h"
+
+class Serv : public iServ, public iServ2
+{
+private:
+    int countReference = 0;
+public:
+    void Func();
+    void Func2();
+    H_RESULT QueryInterface(I_ID iid, void** ppv);
+    U_LONG AddRef();
+    U_LONG Release();
+    ~Serv();
+};
+
+class Serv2 : public iServ, public iServ2
+{
+public:
+    void Func();
+    void Func2();
+    H_RESULT QueryInterface(I_ID iid, void** ppv);
+};
+
+Serv::~Serv()
+{
+    std::cout << "Delete server" << std::endl;
+}
 
 void Serv::Func()
 {
-    std::cout << "Serv1 Interface 1" << std::endl;
+    std::cout << "Server 1 Interface 1" << std::endl;
 }
 
 void Serv::Func2()
 {
-    std::cout << "Serv 1 Interface 2" << std::endl;
+    std::cout << "Server 1 Interface 2" << std::endl;
+}
+
+U_LONG Serv::AddRef() 
+{
+    countReference++;
+    std::cout << "Add reference: " << countReference << std::endl;
+    return countReference;
+}
+
+U_LONG Serv::Release() 
+{
+    countReference--;
+    std::cout << "Delete reference: " << countReference << std::endl;
+    if(countReference == 0)
+    {
+        delete this;
+    }
+    return countReference;
 }
 
 H_RESULT Serv::QueryInterface(I_ID iid, void** ppv)
 {
     switch (iid)
     {
-        case 0:
+        case IID_iUnknown:
         {
             *ppv = (iUnknown*) (iServ*) this;
-            return 0;
-        }
-        case 1:
-        {
-            *ppv = (iServ*) this;
-            return 1;
-        }
-        case 2:
-        {
-            *ppv = (iServ2*) this;
-            return 2;
-        }
-        default:
-        {
-            *ppv = NULL;
-            return -1;
-        }
-    }
-}
-
-void Serv2::Func()
-{
-    std::cout << "Server 2 Interface 1" << std::endl;
-}
-
-void Serv2::Func2()
-{
-    std::cout << "Serv 2 Interface 2" << std::endl;
-}
-
-H_RESULT Serv2::QueryInterface(I_ID iid, void** ppv)
-{
-    switch (iid)
-    {
-        case 0:
-        {
-            *ppv = (iUnknown*) (iServ*) this;
-            return 0;
-        }
-        case 1:
-        {
-            *ppv = (iServ*) this;
-            return 1;
-        }
-        case 2:
-        {
-            *ppv = (iServ2*) this;
-            return 2;
-        }
-        default:
-        {
-            *ppv = NULL;
-            return -1;
-        }
-    }
-}
-
-H_RESULT CreateInstance(CLS_ID clsid, I_ID iid, void** ppv)
-{
-    iUnknown* Serv;
-    switch (clsid)
-    {
-        case 1:
-        {
-            Serv = (iUnknown*) (iServ*) new Serv2();
             break;
         }
-        case 2:
+        case IID_iServ:
         {
-            Serv = (iUnknown*) (iServ2*) new Serv2();
+            *ppv = (iServ*) this;
+            break;
+        }
+        case IID_iServ2:
+        {
+            *ppv = (iServ2*) this;
             break;
         }
         default:
         {
-            return 1;
+            *ppv = NULL;
+            return E_NOINTERFACE;
         }
     }
-    if(Serv->QueryInterface(iid, ppv) == -1) return 2;
-    return 0;
+    AddRef();
+    return S_OK;
+}
+
+H_RESULT IServerFactory::CreateInstance(I_ID iid, void** ppv)
+{
+    Serv* serv = new Serv();
+    if (serv == 0)
+    {
+        return E_OUTOFMEMORY;
+    }
+    H_RESULT res = serv->QueryInterface(iid, ppv);
+    return res;
+}
+
+H_RESULT IServerFactory::QueryInterface(I_ID iid, void** ppv)
+{
+    if (iid == IID_iUnknown || iid == IID_iClassFactory)
+    {
+        *ppv = (iClassFactory*) this;
+    }
+    else
+    {
+        *ppv = 0;
+        return E_NOINTERFACE;
+    }
+    AddRef();
+    return S_OK;
+}
+
+H_RESULT GetClassObject(CLS_ID clsid, I_ID iid, void** ppv)
+{
+    if(clsid != CLSIDServ)
+    {
+        return E_CLASSNOTAVAILABLE;
+    }
+    iServFactory* factory = new IServFactory();
+    if(factory == 0) 
+    {
+        return E_OUTOFMEMORY;
+    }
+    H_RESULT res = factory->QueryInterface(iid, ppv);
+    return res;
 }
