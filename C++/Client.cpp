@@ -1,14 +1,16 @@
 #include <iostream>
-#include "Iface.h"
+#include "Server.h"
 
 using namespace std;
 int main()
 {
-    IServerFactory* serverFactory;
-    IServer2* iServer;
-    H_RESULT res = GetClassObject(CLSIDServ, IID_iClassFactory, (void**)&servFactory);
-    if(res != S_OK) return res;
-    res = serverFactory->CreateInstance(IID_iServ2, (void**)&iServ);
-    if(res != S_OK) return res;
-    iServer->Func2();
+    IServer* ppv;
+    CLS_ID clsid = 1;
+    I_ID iid = 1;
+    if(CreateInstance(clsid, iid, (void**)&ppv) != 0)
+    {
+        cout << "Error";
+        return 0;
+    }
+    ppv->Func();
 }
