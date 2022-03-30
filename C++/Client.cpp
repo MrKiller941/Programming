@@ -3,8 +3,7 @@
 
 using namespace std;
 int main()
-{
-    IServer* ppv;
+{   iServer* ppv;
     CLS_ID clsid = 1;
     I_ID iid = 1;
     if(CreateInstance(clsid, iid, (void**)&ppv) != 0)

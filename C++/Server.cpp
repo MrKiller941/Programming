@@ -17,17 +17,17 @@ H_RESULT Server::QueryInterface(I_ID iid, void** ppv)
     {
         case 0:
         {
-            *ppv = (iUnknown*) (IServer*) this;
+            *ppv = (iUnknown*) (iServer*) this;
             return 0;
         }
         case 1:
         {
-            *ppv = (IServer*) this;
+            *ppv = (iServer*) this;
             return 1;
         }
         case 2:
         {
-            *ppv = (IServer2*) this;
+            *ppv = (iServer2*) this;
             return 2;
         }
         default:
@@ -54,17 +54,17 @@ H_RESULT Server2::QueryInterface(I_ID iid, void** ppv)
     {
         case 0:
         {
-            *ppv = (iUnknown*) (IServer*) this;
+            *ppv = (iUnknown*) (iServer*) this;
             return 0;
         }
         case 1:
         {
-            *ppv = (IServer*) this;
+            *ppv = (iServer*) this;
             return 1;
         }
         case 2:
         {
-            *ppv = (IServer2*) this;
+            *ppv = (iServer2*) this;
             return 2;
         }
         default:
@@ -82,12 +82,12 @@ H_RESULT CreateInstance(CLS_ID clsid, I_ID iid, void** ppv)
     {
         case 1:
         {
-            server = (iUnknown*) (IServer*) new Server();
+            server = (iUnknown*) (iServer*) new Server();
             break;
         }
         case 2:
         {
-            server = (iUnknown*) (IServer2*) new Server2();
+            server = (iUnknown*) (iServer2*) new Server2();
             break;
         }
         default:
