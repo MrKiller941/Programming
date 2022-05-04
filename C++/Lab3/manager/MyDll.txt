@@ -1,0 +1,3 @@
+Cringe Moment
+DLL C:\Users\sobol\Desktop\Programming\C++\Lab3\Server\build\Component.dll
+12 C:\Users\sobol\Desktop\Programming\C++\Lab3\Server\build\MyComponent.dll
