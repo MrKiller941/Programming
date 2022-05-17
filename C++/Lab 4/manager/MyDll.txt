@@ -1,0 +1,1 @@
+12 C:\Users\sobol\Desktop\Programming\C++\Lab 4\Server\build\MyComponent.dll
