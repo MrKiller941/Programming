@@ -87,7 +87,7 @@ void ComponentSecond::additionTMByTwo()
     {
         for (int j = 0; j < m; j++)
         {
-            matrix[i][j] *= 2;
+            matrix[i][j] += 2;
         }
     }
     this->PrintMatrix();
