@@ -1,3 +1,0 @@
-Xiaomi 59200 2 8
-Huawei 68000 2 16
-Honor 98000 3 32
