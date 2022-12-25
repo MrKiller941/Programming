@@ -1,0 +1,23 @@
+{
+  "name": "webpack_config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx webpack --mode production",
+    "dev": "webpack-dev-server --open --mode development",
+    "test": "webpack server --config ./webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.7.3",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "dev-server": "^0.2.0",
+    "html-webpack-plugin": "^5.5.0"
+  }
+}
