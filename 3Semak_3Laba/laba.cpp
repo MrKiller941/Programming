@@ -14,7 +14,7 @@ public:
 	Shapes()
 	{
 		x = 0;
-		y = 0;
+		y = 0; s
 	}
 	virtual ~Shapes() {};
 	virtual string to_String() = 0;
